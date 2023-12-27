@@ -1,6 +1,6 @@
 import React from 'react'
 import "./page.scss";
-import Navigation from "../components/Navigation";
+import Navigation from "../components/Navigation/Navigation";
 
 function Home() {
   return (
