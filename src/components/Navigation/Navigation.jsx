@@ -1,4 +1,6 @@
-import React from "react";
+// Navigation.jsx
+"use client";
+import React, { useState } from "react";
 import "./Navigation.scss";
 
 const asideData = [
@@ -40,10 +42,22 @@ const topData = [
 ];
 
 function Navigation() {
+  const [toggleAside, setToggleAside] = useState(true);
+
+  const asideToggler = () => {
+    setToggleAside(!toggleAside);
+  };
+
   return (
     <div className="navigation">
       <div className="top-bar">
-        <div>
+        <div className="top-bar-flex">
+          <div
+            className={`aside-bar-toggle ${toggleAside ? "open" : ""}`}
+            onClick={asideToggler}
+          >
+            <i className="fa-solid fa-list"></i>
+          </div>
           <ul>
             {topData.map((v1, v1Index) => (
               <li key={v1Index}>
@@ -55,17 +69,20 @@ function Navigation() {
           </ul>
         </div>
       </div>
-      <div className="aside-bar">
-        <div className="logo">
+      <div className={`aside-bar ${toggleAside ? "open" : ""}`}>
+        <div className={`logo ${toggleAside ? "" : "hide"}`}>
           <img src="/next.svg" />
         </div>
-        <ul>
-          {asideData.map((v2, v2Index) => (
-            <li key={v2Index}>
-              <a href={v2.link}>{v2.page}</a>
-            </li>
-          ))}
-        </ul>
+        <div className="aside-menu">
+          <p className={`list-title ${toggleAside ? "" : "hide"}`}>MAIN</p>
+          <ul className={`${toggleAside ? "" : "hide"}`}>
+            {asideData.map((v2, v2Index) => (
+              <li key={v2Index}>
+                <a href={v2.link}>{v2.page}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
